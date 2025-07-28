@@ -1,0 +1,25 @@
+/* Animation pour le défilement infini des logos */
+@keyframes scroll-infinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-infinite {
+  animation: scroll-infinite 30s linear infinite;
+}
+
+/* Pause l'animation au survol pour une meilleure UX */
+.animate-scroll-infinite:hover {
+  animation-play-state: paused;
+}
+
+/* Animation plus rapide pour mobile */
+@media (max-width: 768px) {
+  .animate-scroll-infinite {
+    animation-duration: 20s;
+  }
+}
