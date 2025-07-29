@@ -3,7 +3,9 @@
 import { cn } from "@/lib/utils";
 import { Quote, Smile } from "lucide-react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 // Données des témoignages
 const testimonials = [
@@ -38,20 +40,28 @@ interface TestimonialsProps {
 }
 
 export function Testimonials({ className }: TestimonialsProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: 'center' },
+    [Autoplay({ delay: 5000, stopOnInteraction: false })]
+  );
 
-  // Autoplay functionality
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000); // Change every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const currentTestimonial = testimonials[currentIndex];
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
 
   return (
     <section className={cn("bg-white", className)}>
@@ -69,41 +79,40 @@ export function Testimonials({ className }: TestimonialsProps) {
               <Smile className="w-6 h-6 text-gray-800" />
             </div>
 
-            {/* Texte du témoignage avec transition */}
-            <div className="min-h-[100px] flex items-center justify-start">
-              <blockquote 
-                key={currentIndex}
-                className="text-sm md:text-base flex items-start justify-start text-gray-800 leading-relaxed max-w-xl mx-auto font-light transition-all duration-500 ease-in-out animate-fade-in"
-              >
-                <Quote className="w-16 h-16 -pt-8 text-gray-400 " /> {currentTestimonial.text}
-              </blockquote>
-            </div>
+            {/* Embla Carousel pour les témoignages */}
+            <div className="embla overflow-hidden rounded-b-full" ref={emblaRef}>
+              <div className="embla__container flex">
+                {testimonials.map((testimonial, index) => (
+                  <div key={testimonial.id} className="embla__slide flex-[0_0_100%] min-w-0">
+                    {/* Texte du témoignage */}
+                    <div className="min-h-[100px] flex items-center justify-start">
+                      <blockquote className="text-sm md:text-base flex items-start justify-start text-gray-800 leading-relaxed max-w-xl mx-auto font-light">
+                        <Quote className="w-16 h-16 -pt-8 text-gray-400 " /> {testimonial.text}
+                      </blockquote>
+                    </div>
 
-            {/* Informations sur l'auteur avec transition */}
-            <div className="flex items-center justify-center gap-2 mb-4 mt-8">
-              <div className="relative w-12 h-12 rounded-lg overflow-hidden">
-                <Image
-                  key={`avatar-${currentIndex}`}
-                  src={currentTestimonial.avatar}
-                  alt={currentTestimonial.author}
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full transition-all duration-500 ease-in-out"
-                />
-              </div>
-              <div className="text-left">
-                <h4 
-                  key={`name-${currentIndex}`}
-                  className="font-semibold text-gray-900 transition-all duration-500 ease-in-out"
-                >
-                  {currentTestimonial.author}
-                </h4>
-                <p 
-                  key={`position-${currentIndex}`}
-                  className="text-gray-500 transition-all text-sm font-light duration-500 ease-in-out"
-                >
-                  {currentTestimonial.position}
-                </p>
+                    {/* Informations sur l'auteur */}
+                    <div className="flex items-center justify-center gap-2 mb-4 mt-8">
+                      <div className="relative w-12 h-12 rounded-lg overflow-hidden">
+                        <Image
+                          src={testimonial.avatar}
+                          alt={testimonial.author}
+                          width={500}
+                          height={500}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-semibold text-gray-900">
+                          {testimonial.author}
+                        </h4>
+                        <p className="text-gray-500 text-sm font-light">
+                          {testimonial.position}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -112,9 +121,9 @@ export function Testimonials({ className }: TestimonialsProps) {
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIndex(index)}
+                  onClick={() => scrollTo(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                    index === currentIndex ? 'bg-gray-800' : 'bg-gray-300 hover:bg-gray-400'
+                    index === selectedIndex ? 'bg-gray-800' : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
