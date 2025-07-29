@@ -18,7 +18,7 @@ export function CTAButton({
     text?: string;
     iconContainer?: string;
   };
-  onPress?: () => {};
+  onPress?: () => void;
 }) {
 
   if (iconBtn) {

@@ -70,7 +70,7 @@ export function Gallery({ className }: GalleryProps) {
 
 
           {/* Carte CTA centrale - position exacte comme dans l'image */}
-          <div className="col-span-2 sm:w-[14rem] w-full h-[14rem] z-50 relative md:-top-10 top-1 bg-black rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer">
+          <div className="col-span-2 sm:w-[14rem] w-full h-[14rem] z-10 relative md:-top-10 top-1 bg-black rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer">
             <div className="h-full flex flex-col items-center justify-center p-4 text-center">
               <div className="mb-4">
                 <h3 className="text-white text-sm font-semibold mb-2 leading-tight">

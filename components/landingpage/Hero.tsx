@@ -1,12 +1,10 @@
 "use client";
 
 import { Apple, Download } from "lucide-react";
-import { Header } from "./Header";
 
 export function Hero() {
   return (
     <section className="w-full flex flex-col">
-      <Header />
       <div className="bg-[url('/images/hero_bg.jpg')] w-full sm:h-[45rem] h-[50rem] p-3 sm:p-5 flex flex-col relative rounded-3xl">
         <FlaotingButtons />
 

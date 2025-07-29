@@ -21,7 +21,7 @@ export function Header() {
   ];
 
   return (
-    <section className="w-full flex flex-col md:flex-row gap-4 justify-between items-center py-5">
+    <section className="w-full bg-white sticky top-0 z-50 flex flex-col md:flex-row gap-4 justify-between items-center py-5">
       <div className="w-full flex items-center gap-5 justify-between md:max-w-xs">
         <div className="w-full flex items-center gap-2">
           <Sun className="w-7 h-7" />

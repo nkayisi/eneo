@@ -18,7 +18,7 @@ interface ContactProps {
 
 export function Contact({ className }: ContactProps) {
   return (
-    <section className={cn("pb-10 pt-28 sm:pt-0", className)}>
+    <section className={cn("pb-10 pt-40 sm:pt-0", className)}>
       <div className="relative mx-auto">
         {/* Titre principal SUNRISE CONTACT */}
         <div className="text-center mb-8">

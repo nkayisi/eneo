@@ -7,7 +7,7 @@ export function About() {
     <section className="md:space-y-24 space-y-12 pb-14 border-b border-border">
       <div className="space-y-7">
         <span className="flex gap-2 items-center border border-border w-max mx-auto rounded-full px-5 py-2 text-xs md:text-sm font-light">
-          Let's know us
+          Let&apos;s know us
           <ArrowRight className="w-4 h-4" />
         </span>
 
