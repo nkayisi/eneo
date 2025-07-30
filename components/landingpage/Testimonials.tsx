@@ -82,7 +82,7 @@ export function Testimonials({ className }: TestimonialsProps) {
             {/* Embla Carousel pour les témoignages */}
             <div className="embla overflow-hidden rounded-b-full" ref={emblaRef}>
               <div className="embla__container flex">
-                {testimonials.map((testimonial, index) => (
+                {testimonials.map((testimonial) => (
                   <div key={testimonial.id} className="embla__slide flex-[0_0_100%] min-w-0">
                     {/* Texte du témoignage */}
                     <div className="min-h-[100px] flex items-center justify-start">

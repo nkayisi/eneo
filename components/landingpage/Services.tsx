@@ -107,7 +107,7 @@ export function Services() {
           ref={emblaRef}
         >
           <div className="embla__container flex">
-            {servicesData.map((service, index) => (
+            {servicesData.map((service) => (
               <div
                 key={service.id}
                 className="embla__slide flex-[0_0_100%] min-w-0"

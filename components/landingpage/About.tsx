@@ -136,7 +136,7 @@ export function About() {
           {/* Embla Carousel */}
           <div className="embla overflow-hidden rounded-2xl" ref={emblaRef}>
             <div className="embla__container flex">
-              {carouselData.map((item, index) => (
+              {carouselData.map((item) => (
                 <div key={item.id} className="embla__slide flex-[0_0_100%] min-w-0">
                   <div className="w-full h-[13rem] relative flex flex-col rounded-2xl">
                     <Image

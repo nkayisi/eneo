@@ -95,6 +95,47 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@layer utilities {
+  /* iOS zoom prevention utility class */
+  .no-ios-zoom {
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100% !important;
+    transform: scale(1) !important;
+  }
+  
+  .no-ios-zoom:focus {
+    font-size: 16px !important;
+  }
+}
+
+@layer base {
+  /* Global iOS zoom prevention - More aggressive approach */
+  * {
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  input,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100% !important;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100% !important;
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

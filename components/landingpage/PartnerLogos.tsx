@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 // Logos de partenaires - remplacez ces URLs par vos vrais logos
 const partnerLogos = [
@@ -60,9 +61,11 @@ export function PartnerLogos({ className }: PartnerLogosProps) {
                   key={`first-${index}`}
                   className="flex items-center justify-center mx-8 grayscale hover:grayscale-0 transition-all duration-300"
                 >
-                  <img
+                  <Image
                     src={partner.logo}
                     alt={`${partner.name} logo`}
+                    width={120}
+                    height={120}
                     className="h-12 w-auto max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
                   />
                 </div>
@@ -76,9 +79,11 @@ export function PartnerLogos({ className }: PartnerLogosProps) {
                   key={`second-${index}`}
                   className="flex items-center justify-center mx-8 grayscale hover:grayscale-0 transition-all duration-300"
                 >
-                  <img
+                  <Image
                     src={partner.logo}
                     alt={`${partner.name} logo`}
+                    width={120}
+                    height={120}
                     className="h-12 w-auto max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
                   />
                 </div>
